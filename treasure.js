@@ -855,7 +855,7 @@ input.forEach((line) => {
 
     //🍓 QUESTION TWO 🍓
     //🍃 this makes a new array 🍃
-    
+    //try using .filter
 
 
     //grabs all the numbers from the array
