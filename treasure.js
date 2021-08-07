@@ -786,20 +786,99 @@ const input = [
   ];
 
 
+
 //🍓 the yard 🍓
-let yardMinLength = 0;
-let yardMaxLength = 127;
+let yardMinLength = 1027;
+let yardMaxLength = 0;
+
+
+//🍓 answer 🍓
+let key = '';
 
 
 //🍓 this seperates the letters and makes them do their job 🍓
 input.forEach((line) => {
     // line = line.split("")
     // line.forEach()
-    for(letter of line){
-        if(letter ==="F"){
+    //🍃 answer numbers 🍃
+    //the front of the yard
+    let answerF = 0
+    //the back of the yard
+    let answerB = 127
+    //the right end of the yard
+    let answerR = 7
+    //the left end of the yard
+    let answerL = 0
 
-        }else if( letter === "B"){
+    for(let letter of line){
+        //🍃 if the letter is F answerB is made smaller 🍃
+        if(letter === "F"){
+            //💧 this minimizes the BACK of the yard since you're moving FORWARD 💧
+            answerB = Math.floor((answerB + answerF)/2);
+        }
+        //🍃 if the letter is B answerF is made smaller 🍃
+        else if( letter === "B"){
+            //💧 this minimizes the FRONT of the yard since you're moving BACK 💧
+            answerF = Math.ceil((answerB + answerF)/2);
 
-        }else 
+            /*the BIGGER number here is the BACK back of the yard 
+            let maxBack = yardMaxLength;
+            this gives the number
+            answerB = (minBack-maxBack)/2;*/
+        }
+        //🍃 if the letter is L answerR is made smaller 🍃
+        else if( letter === "L"){
+            //💧 this minimizes the RIGHT side of the yard since you're moving LEFT 💧
+            answerR = Math.floor((answerR + answerL)/2);
+        }
+        //🍃 if the letter is R answerL is made smaller 🍃
+        else if( letter === "R"){
+            //💧 this minimizes the LEFT side of the yard since you're moving RIGHT 💧
+            answerL = Math.ceil((answerR + answerL)/2);
+        }
     }
+    //🍃 multiplies the row answered by the amount of columns there is in total. then it adds by the column answered 🍃
+    key = answerF * 8 + answerL;
+
+    //🍓 QUESTION ONE 🍓
+    //🍃 if the key is smaller than the back of the yard length(1207), then that's the back of the yard 🍃
+    if(key < yardMinLength){
+        yardMinLength = key;
+    }
+    //🍃 if the key is bigger than the front of the yard length(0), then that's the front of the yard 🍃
+    if(key > yardMaxLength){
+        yardMaxLength = key;
+    }
+    console.log(key)
 })
+
+
+    //🍓 QUESTION TWO 🍓
+    //🍃 this makes a new array 🍃
+    
+
+
+    //grabs all the numbers from the array
+    //adds them all together
+    //subtract 51 right away
+    //subtract the added numbers from 832
+
+
+
+
+    //🍓 QUESTION THREE 🍓
+    //🍃  🍃
+
+
+
+    //🍓 ANSWER ONE 🍓
+console.log('the smallest square Jenkins went digging in is', yardMinLength)
+console.log('the biggest square Jenkins went digging in is', yardMaxLength)
+
+
+
+//first letter changes the max and min yard length
+//second letter changes the max and min yard again
+//so on and so forth
+
+//console.log(key)
