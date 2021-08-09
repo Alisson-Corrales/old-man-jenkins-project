@@ -794,6 +794,8 @@ let yardMaxLength = 0;
 
 //🍓 answer 🍓
 let key = '';
+
+let sum = 0;
 let missing = [];
 
 
@@ -858,14 +860,18 @@ input.forEach((line) => {
     //🍃 this makes a new array 🍃
     //try using .filter
     input.filter((inNumbers) => {
-        for(let num of inNumbers){
+        for(let i of inNumbers){
+            sum += inNumbers[i]
+        }
+        /*for(let num of inNumbers){
             //if a number isn't found in inNumders (-1) it's logged)
             if(inNumbers.indexOf[num] == -1){
             missing = num;
-        }
+        }*/
     }
         //how to find missing number
-    console.log(missing)})
+    //console.log(missing)})
+    
     
 
     //grabs all the numbers from the array
