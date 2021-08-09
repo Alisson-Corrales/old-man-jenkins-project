@@ -794,6 +794,7 @@ let yardMaxLength = 0;
 
 //🍓 answer 🍓
 let key = '';
+let missing = [];
 
 
 //🍓 this seperates the letters and makes them do their job 🍓
@@ -842,21 +843,30 @@ input.forEach((line) => {
 
     //🍓 QUESTION ONE 🍓
     //🍃 if the key is smaller than the back of the yard length(1207), then that's the back of the yard 🍃
-    if(key < yardMinLength){
+    /*if(key < yardMinLength){
         yardMinLength = key;
-    }
+    }*/
     //🍃 if the key is bigger than the front of the yard length(0), then that's the front of the yard 🍃
-    if(key > yardMaxLength){
+    /*if(key > yardMaxLength){
         yardMaxLength = key;
     }
-    console.log(key)
+    console.log(key)*/
 })
 
 
     //🍓 QUESTION TWO 🍓
     //🍃 this makes a new array 🍃
     //try using .filter
-
+    input.filter((inNumbers) => {
+        for(let num of inNumbers){
+            //if a number isn't found in inNumders (-1) it's logged)
+            if(inNumbers.indexOf[num] == -1){
+            missing = num;
+        }
+    }
+        //how to find missing number
+    console.log(missing)})
+    
 
     //grabs all the numbers from the array
     //adds them all together
