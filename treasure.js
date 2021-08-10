@@ -793,10 +793,13 @@ let yardMaxLength = 0;
 
 
 //🍓 answer 🍓
+let missing = []
+let three = []
+let keys = []
+let colsNrows = []
 let key = '';
 
 let sum = 0;
-let missing = [];
 
 
 //🍓 this seperates the letters and makes them do their job 🍓
@@ -842,59 +845,161 @@ input.forEach((line) => {
     }
     //🍃 multiplies the row answered by the amount of columns there is in total. then it adds by the column answered 🍃
     key = answerF * 8 + answerL;
+    missing.push(key);
+    three.push(key);
+    keys.push(key);
+    colsNrows.push(key);
+
 
     //🍓 QUESTION ONE 🍓
     //🍃 if the key is smaller than the back of the yard length(1207), then that's the back of the yard 🍃
-    /*if(key < yardMinLength){
+    if(key < yardMinLength){
         yardMinLength = key;
-    }*/
+    }
     //🍃 if the key is bigger than the front of the yard length(0), then that's the front of the yard 🍃
-    /*if(key > yardMaxLength){
+    if(key > yardMaxLength){
         yardMaxLength = key;
     }
-    console.log(key)*/
+    //console.log(key)
 })
 
 
-    //🍓 QUESTION TWO 🍓
-    //🍃 this makes a new array 🍃
-    //try using .filter
-    input.filter((inNumbers) => {
-        for(let i of inNumbers){
-            sum += inNumbers[i]
-        }
-        /*for(let num of inNumbers){
-            //if a number isn't found in inNumders (-1) it's logged)
-            if(inNumbers.indexOf[num] == -1){
-            missing = num;
-        }*/
+//🍓 QUESTION TWO 🍓
+//🍃 this makes a new array 🍃
+//make an array that goes to the max and compare this array to the OG
+
+/*let num = [];
+for(let i = 51; i < yardMaxLength; i++){
+    num += [i]
+}
+console.log(num)
+
+input.filter((inNumbers) => {
+    for(let )
+    for(let items of answer){
+        if(items[i] === ){}
     }
-        //how to find missing number
-    //console.log(missing)})
+})*/
+
+//teacher's vers.
+    //let dugHoles = answerF * 8 + answerL;
+let missingSquare = 0;
+for(let i = yardMinLength; i <= yardMaxLength; i++){
+    if(keys.some(hole => hole == i)){
+        continue
+    }else{
+        missingSquare = i;
+        break
+    }
+    /*let check = dugHoles.some((hole) => {
+        return hole == i
+    })
+    if(check){
+        continue;
+    }else{
+        missingSquare = i;
+        break
+    }*/
+}
+
+
+
+//🍓 QUESTION THREE 🍓
+//🍃  🍃
+/*let answers = []
+for(let letts of three){
+    if(letts <= 3){
+        answers += 'L'
+    }else if(letts >= 4){
+        answers += 'r'
+    }
+}
+console.log(answers)*/
+//col = miss hole % 4
+//row = (miss hole - 2) / 4
+//compare row and column to max length and max height of yard to the missing hole
     
-    
+let col = missingSquare % 8;
+let row = (missingSquare - col) / 8 // 
 
-    //grabs all the numbers from the array
-    //adds them all together
-    //subtract 51 right away
-    //subtract the added numbers from 832
+//the front of the yard
+let rowMin = 0
+//the back of the yard
+let rowMax = 127
+//the right end of the yard
+let colMax = 7
+//the left end of the yard
+let colMin = 0
+let encoded = '';
+
+while(rowMax != rowMin){
+    let middle = (rowMax + rowMin) / 2;
+    if(row > middle) {
+        encoded += "B"
+        rowMin = Math.ceil(middle)
+    } else { //row < middle
+        encoded += "F"
+        rowMax = Math.floor(middle)
+    }
+}
+
+while(colMax != colMin){
+    let middle = (colMax + colMin) / 2;
+    if(col > middle) {
+        encoded += "R"
+        colMin = Math.ceil(middle)
+    } else { // ol < middle
+        encoded += "L"
+        colMax = Math.floor(middle)
+    }
+}
 
 
 
+//🍓 QUESTION THREE 🍓
+//🍃  🍃
+let colu = [];
+let rows = [];
+/*
+//this goes through each number in the array and pushes out the row and columns
+for(let i of colsNrows){
+    //missingSquare % 8
+    //(missingSquare - colu) / 8
+    colu += Math.ceil(i % 8);
+    rows += Math.ceil((i - colu) / 8);
+}
+console.log(colu);
+console.log(rows)
 
-    //🍓 QUESTION THREE 🍓
-    //🍃  🍃
+let combo = [colu, rows];*/
+
+
+//teacher vers.
+let rowsTotal = rows.reduce((total, row) => {
+    return total + row
+}, 0)
+let colsTotal = colu.reduce((total, coll) => total + coll, 0);
 
 
 
-    //🍓 ANSWER ONE 🍓
-console.log('the smallest square Jenkins went digging in is', yardMinLength)
+//🍓 ANSWER ONE 🍓
+console.log('the smallest square Jenkins went digging in is', yardMinLength);
 console.log('the biggest square Jenkins went digging in is', yardMaxLength)
 
+//🍓 ANSWER TWO 🍓
+console.log(missingSquare) //517
+
+//🍓 ANSWER THREE 🍓
+console.log(encoded) //BFFFFFFRLR
+
+//🍓 ANSWER FOUR 🍓
+console.log(rowsTotal * colsTotal) //116964000
 
 
-//first letter changes the max and min yard length
-//second letter changes the max and min yard again
-//so on and so forth
-
-//console.log(key)
+const content = document.getElementById('content'); 
+for(let i = 0; i <= 1027; i++){
+    let dug = keys.some((hole) => hole == i)
+    content.innerHTML += `<div class='hole ${dug ? 'dug' : 'undug'}'>
+        row: ${(i - (i % 8)) / 8} - col: ${i % 8}
+    </div>`;
+}
